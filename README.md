@@ -19,11 +19,11 @@
 * `vagrant up`
 * Make any changes you need to the box. Be sure to reflect these changes in the `provision.sh` script.
 * Before packaging up the box, ssh in, and run the commands that are in the comments at the end of `Vagrantfile`.
-* Package up the box with `vagrant package --output server4001-php7-0.1.0.box`. Replace `0.1.0` with the version number.
+* Package up the box with `vagrant package --output server4001-php7-0.2.0.box`. Replace `0.2.0` with the version number.
 * Destroy the vm with `vagrant destroy`.
-* Add the new box to vagrant's local list with: `vagrant box add server4001/php7-010 server4001-php7-0.1.0.box`. Again, replace `010` and `0.1.0` with the version number.
+* Add the new box to vagrant's local list with: `vagrant box add server4001/php7-020 server4001-php7-0.2.0.box`. Again, replace `020` and `0.2.0` with the version number.
 * Delete the `.vagrant` folder with `rm -rf .vagrant`.
-* Test out the box by going to a different folder, running `vagrant init server4001/php7-010`, and changing the `Vagrantfile` to fit your needs. Next, run `vagrant up`, and ensure everything is working.
+* Test out the box by going to a different folder, running `vagrant init server4001/php7-020`, and changing the `Vagrantfile` to fit your needs. Next, run `vagrant up`, and ensure everything is working.
 * Create a new version on Atlas.
 * Add a new provider to the version. The type should be `virtualbox`. Upload the .box file to this provider.
 

@@ -4,7 +4,7 @@
 sudo add-apt-repository -y ppa:ondrej/php
 sudo apt-get -y update
 sudo apt-get install -y git build-essential
-sudo apt-get install -y php7.0 php7.0-dev php7.0-common php7.0-cli php7.0-fpm php7.0-curl php7.0-gd php7.0-mcrypt php7.0-readline php7.0-pgsql php7.0-xmlrpc php7.0-json php7.0-sqlite3 php7.0-mysql php7.0-opcache php7.0-bz2 php7.0-xml php7.0-mbstring php7.0-soap php7.0-zip
+sudo apt-get install -y php7.0 php7.0-dev php7.0-common php7.0-cli php7.0-fpm php7.0-curl php7.0-gd php7.0-mcrypt php7.0-readline php7.0-pgsql php7.0-xmlrpc php7.0-json php7.0-sqlite3 php7.0-mysql php7.0-opcache php7.0-bz2 php7.0-xml php7.0-mbstring php7.0-soap php7.0-zip php7.0-intl
 sudo mkdir /var/log/www
 sudo chown vagrant:vagrant /var/log/www
 sudo chown vagrant:vagrant /var/lib/php/sessions
@@ -85,6 +85,28 @@ mysql -u root -p"$DATABASE_PASS" -e "UPDATE mysql.user SET Password=PASSWORD('$D
 mysql -u root -p"$DATABASE_PASS" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"
 mysql -u root -p"$DATABASE_PASS" -e "DELETE FROM mysql.user WHERE User=''"
 mysql -u root -p"$DATABASE_PASS" -e "FLUSH PRIVILEGES"
+
+# Install Beanstalkd.
+sudo apt-get update
+sudo apt-get install -y beanstalkd
+sudo rm /etc/default/beanstalkd
+sudo cp /vagrant/config/beanstalkd.conf /etc/default/beanstalkd
+sudo service beanstalkd start
+sudo update-rc.d beanstalkd enable
+
+# Install Redis
+sudo apt-get install -y redis-server
+sudo cp /vagrant/config/redis.conf /etc/redis/redis.conf
+sudo service redis-server restart
+sudo update-rc.d redis-server enable
+
+# Install Memcached.
+sudo apt-get install -y memcached
+sudo rm /etc/memcached.conf
+sudo cp /vagrant/config/memcached.conf /etc/memcached.conf
+sudo service memcached restart
+sudo update-rc.d memcached enable
+sudo apt-get install -y php-memcached
 
 # Web root.
 sudo chown -R vagrant:vagrant /var/www
