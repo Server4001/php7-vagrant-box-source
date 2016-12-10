@@ -9,9 +9,9 @@
 #### Features
 
 * Ubuntu Trusty Tahr 14.04.3 LTS
-* Nginx 1.8.1
-* MySQL 5.5.47
-* PHP 7.0.3
+* Nginx 1.10.1
+* MySQL 5.5.53
+* PHP 7.0.14
 * [PHP7 Data Structures](https://github.com/php-ds/extension)
 
 #### Instructions
@@ -20,7 +20,7 @@
 * Make any changes you need to the box. Be sure to reflect these changes in the `provision.sh` script.
 * Before packaging up the box, ssh in, and run the commands that are in the comments at the end of `Vagrantfile`.
 * Package up the box with `vagrant package --output server4001-php7-0.2.0.box`. Replace `0.2.0` with the version number.
-* Destroy the vm with `vagrant destroy`.
+* Destroy the vm with `vagrant destroy -f`.
 * Add the new box to vagrant's local list with: `vagrant box add server4001/php7-020 server4001-php7-0.2.0.box`. Again, replace `020` and `0.2.0` with the version number.
 * Delete the `.vagrant` folder with `rm -rf .vagrant`.
 * Test out the box by going to a different folder, running `vagrant init server4001/php7-020`, and changing the `Vagrantfile` to fit your needs. Next, run `vagrant up`, and ensure everything is working.
@@ -30,3 +30,5 @@
 #### MySQL Credentials
 * Username: `root`
 * Password: `password`
+
+### TODO:
