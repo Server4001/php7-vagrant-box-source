@@ -1,0 +1,9 @@
+---
+- name: Install common packages via APT
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: no
+  with_items:
+    - git
+    - build-essential

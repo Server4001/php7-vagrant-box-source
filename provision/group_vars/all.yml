@@ -1,0 +1,3 @@
+---
+# PHP-FPM socket used by Nginx and PHP-FPM.
+php_fpm_socket_file: /var/run/php71-fpm.sock

@@ -1,76 +1,82 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-# Install PHP7.
-sudo add-apt-repository -y ppa:ondrej/php
-sudo apt-get -y update
-sudo apt-get install -y git build-essential
-sudo apt-get install -y php7.0 php7.0-dev php7.0-common php7.0-cli php7.0-fpm php7.0-curl php7.0-gd php7.0-mcrypt php7.0-readline php7.0-pgsql php7.0-xmlrpc php7.0-json php7.0-sqlite3 php7.0-mysql php7.0-opcache php7.0-bz2 php7.0-xml php7.0-mbstring php7.0-soap php7.0-zip php7.0-intl
-sudo mkdir /var/log/www
-sudo chown vagrant:vagrant /var/log/www
-sudo chown vagrant:vagrant /var/lib/php/sessions
+# export DEBIAN_FRONTEND=noninteractive # TODO : REMOVE.
+export ORIGIN_DIR=/home/vagrant
+
+# Add APT repos.
+add-apt-repository -y ppa:ondrej/php
+add-apt-repository -y ppa:nginx/stable
+apt-get -y update
+
+# Install pre-reqs.
+apt-get install -y git build-essential
+
+# Install PHP 7.1.
+apt-get install -y php7.1 php7.1-dev php7.1-common php7.1-cli php7.1-fpm php7.1-curl php7.1-gd php7.1-mcrypt php7.1-readline php7.1-pgsql php7.1-xmlrpc php7.1-json php7.1-sqlite3 php7.1-mysql php7.1-opcache php7.1-bz2 php7.1-xml php7.1-mbstring php7.1-soap php7.1-zip php7.1-intl
+mkdir /var/log/www
+chown vagrant:vagrant /var/log/www
+chown vagrant:vagrant /var/lib/php/sessions
 
 # Install data structures extension.
-git clone https://github.com/php-ds/extension "php-ds"
-cd php-ds
+git clone https://github.com/php-ds/extension /usr/src/php-ds
+cd /usr/src/php-ds
 phpize
 ./configure
-sudo make install
-sudo make clean
-sudo phpize --clean
-cd $HOME
+make install
+phpize --clean
+cd ${ORIGIN_DIR}
 
-# Add DS extension to PHP7.
-sudo cp /vagrant/config/php/ds.ini /etc/php/7.0/mods-available
-sudo ln -s /etc/php/7.0/mods-available/ds.ini /etc/php/7.0/cli/conf.d/30-ds.ini
-sudo ln -s /etc/php/7.0/mods-available/ds.ini /etc/php/7.0/fpm/conf.d/30-ds.ini
+# Add DS extension to PHP7.1.
+cp /vagrant/config/php/ds.ini /etc/php/7.1/mods-available
+ln -s /etc/php/7.1/mods-available/ds.ini /etc/php/7.1/cli/conf.d/30-ds.ini
+ln -s /etc/php/7.1/mods-available/ds.ini /etc/php/7.1/fpm/conf.d/30-ds.ini
 
 # Install Xdebug.
-wget -O ~/xdebug-2.4.0rc4.tgz https://xdebug.org/files/xdebug-2.4.0rc4.tgz
+wget -O /usr/src/xdebug-2.4.0rc4.tgz https://xdebug.org/files/xdebug-2.4.0rc4.tgz
+cd /usr/src
 tar -xvzf xdebug-2.4.0rc4.tgz
 rm xdebug-2.4.0rc4.tgz
 cd xdebug-2.4.0RC4/
 phpize
 ./configure
 make
-sudo make install
-sudo make clean
-sudo phpize --clean
-cd $HOME
+make install
+phpize --clean
+cd ${ORIGIN_DIR}
 
-# Add Xdebug to PHP7.
-sudo cp /vagrant/config/php/xdebug.ini /etc/php/7.0/mods-available
-sudo ln -s /etc/php/7.0/mods-available/xdebug.ini /etc/php/7.0/cli/conf.d/
-sudo ln -s /etc/php/7.0/mods-available/xdebug.ini /etc/php/7.0/fpm/conf.d/
+# Add Xdebug to PHP7.1.
+cp /vagrant/config/php/xdebug.ini /etc/php/7.1/mods-available # TODO : CHECK THIS.
+ln -s /etc/php/7.1/mods-available/xdebug.ini /etc/php/7.1/cli/conf.d/
+ln -s /etc/php/7.1/mods-available/xdebug.ini /etc/php/7.1/fpm/conf.d/
 
-# Add PHP-AST extension to PHP7.
-git clone https://github.com/nikic/php-ast.git "php-ast"
-cd php-ast
+# Add PHP-AST extension to PHP7.1.
+git clone https://github.com/nikic/php-ast.git /usr/src/php-ast
+cd /usr/src/php-ast
 phpize
 ./configure
 make
-sudo make install
-sudo make clean
-sudo phpize --clean
-cd $HOME
+make install
+phpize --clean
+cd ${ORIGIN_DIR}
 
-# Add PHP-AST to PHP7.
-sudo cp /vagrant/config/php/ast.ini /etc/php/7.0/mods-available
-sudo ln -s /etc/php/7.0/mods-available/ast.ini /etc/php/7.0/cli/conf.d/
-sudo ln -s /etc/php/7.0/mods-available/ast.ini /etc/php/7.0/fpm/conf.d/
+# Add PHP-AST to PHP7.1.
+cp /vagrant/config/php/ast.ini /etc/php/7.1/mods-available
+ln -s /etc/php/7.1/mods-available/ast.ini /etc/php/7.1/cli/conf.d/
+ln -s /etc/php/7.1/mods-available/ast.ini /etc/php/7.1/fpm/conf.d/
 
 # PHP config.
-sudo cp /vagrant/config/php/php-cli.ini /etc/php/7.0/cli/php.ini
-sudo cp /vagrant/config/php/php-fpm.ini /etc/php/7.0/fpm/php.ini
-sudo cp /vagrant/config/php/fpm.conf /etc/php/7.0/fpm/pool.d/www.conf
-sudo service php7.0-fpm restart
+# TODO : CHECK THESE
+cp /vagrant/config/php/php-cli.ini /etc/php/7.1/cli/php.ini
+cp /vagrant/config/php/php-fpm.ini /etc/php/7.1/fpm/php.ini
+cp /vagrant/config/php/fpm.conf /etc/php/7.1/fpm/pool.d/www.conf
+service php7.1-fpm restart
+update-rc.d php7.1-fpm enable
 
 # Install Nginx.
-sudo add-apt-repository -y ppa:nginx/stable
-sudo apt-get update -y
-sudo apt-get install -y nginx
-sudo cp /vagrant/config/nginx/nginx.conf /etc/nginx/nginx.conf
-sudo cp /vagrant/config/nginx/www.conf /etc/nginx/conf.d/www.conf
-sudo service nginx restart
+apt-get install -y nginx
+cp /vagrant/config/nginx/nginx.conf /etc/nginx/nginx.conf
+cp /vagrant/config/nginx/www.conf /etc/nginx/conf.d/www.conf
+service nginx restart
 
 # Install MySQL.
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'

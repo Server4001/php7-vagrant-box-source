@@ -1,0 +1,20 @@
+---
+- name: "Provision Vagrant"
+  hosts: default
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  force_handlers: true
+  any_errors_fatal: true
+
+  roles:
+    - repo_install
+    - common
+#    - mysql
+#    - php7
+#    - nginx
+#    - beanstalkd
+#    - redis
+#    - memcached
+#    - composer
+#    - bash
