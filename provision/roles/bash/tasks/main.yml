@@ -1,0 +1,8 @@
+---
+- name: Add the bash profile
+  template:
+    src: profile.j2
+    dest: /home/vagrant/.profile
+    mode: 0644
+    owner: vagrant
+    group: vagrant

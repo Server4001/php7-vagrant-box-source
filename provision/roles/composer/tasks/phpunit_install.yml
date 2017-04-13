@@ -1,0 +1,10 @@
+---
+- name: Download PHPUnit
+  get_url:
+    url: "{{ composer_phpunit_url }}"
+    dest: /usr/bin/phpunit
+    owner: root
+    group: root
+    mode: 0755
+    checksum: "sha256:{{ composer_phpunit_checksum }}"
+    validate_certs: True

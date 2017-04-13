@@ -1,11 +1,14 @@
 ---
 - name: Create the web root directory
   file:
-    path: /var/www/html
+    path: "{{ item }}"
     state: directory
     mode: 0755
     owner: vagrant
     group: vagrant
+  with_items:
+    - /var/www
+    - /var/www/html
 
 - name: Configure nginx
   template:

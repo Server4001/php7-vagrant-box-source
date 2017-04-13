@@ -1,0 +1,7 @@
+---
+composer_home_path: "~/.composer"
+composer_phpunit_url: 'https://phar.phpunit.de/phpunit-5.7.19.phar'
+composer_phpunit_checksum: '1df539af88e88512d3346c6bfa0c59720fa87011bffb5276551e26df72e5e948'
+
+composer_global_packages:
+  - { name: psy/psysh }

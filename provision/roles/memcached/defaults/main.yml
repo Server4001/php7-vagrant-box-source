@@ -1,0 +1,8 @@
+---
+memcached_address: 127.0.0.1
+memcached_port: 11211
+
+memcached_log_file_path: /var/log/memcached.log
+
+memcached_memory_limit: '128' # In megabytes.
+memcached_incoming_conns: '1024'

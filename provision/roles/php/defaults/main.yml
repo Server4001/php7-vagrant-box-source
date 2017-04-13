@@ -24,6 +24,7 @@ php_packages:
   - php-xdebug
   - php-ds
   - php-ast
+  - php-memcache
 
 php_fpm_pid_path: /run/php/php7.1-fpm.pid
 php_fpm_error_log_path: /var/log/php7.1-fpm.log

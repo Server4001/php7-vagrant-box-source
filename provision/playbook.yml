@@ -15,6 +15,6 @@
     - mysql
     - beanstalkd
     - redis
-#    - memcached
-#    - composer
-#    - bash
+    - memcached
+    - composer
+    - bash

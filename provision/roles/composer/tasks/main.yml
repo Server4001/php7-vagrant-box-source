@@ -1,0 +1,6 @@
+---
+- include: install.yml
+
+- include: package_install.yml
+
+- include: phpunit_install.yml

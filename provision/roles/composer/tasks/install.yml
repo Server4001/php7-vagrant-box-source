@@ -1,0 +1,12 @@
+---
+- name: Install composer
+  shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin creates=/usr/bin/composer
+
+- name: Rename composer.phar
+  shell: mv /usr/bin/composer.phar /usr/bin/composer creates=/usr/bin/composer
+
+- name: Make composer executable
+  file:
+    path: /usr/bin/composer
+    mode: a+x
+    state: file

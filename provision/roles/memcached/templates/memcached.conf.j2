@@ -1,3 +1,5 @@
+# {{ ansible_managed }}
+
 # memcached default config file
 # 2003 - Jay Bonci <jaybonci@debian.org>
 # This configuration file is read by the start-memcached script provided as
@@ -9,7 +11,7 @@
 -d
 
 # Log memcached's output to /var/log/memcached
-logfile /var/log/memcached.log
+logfile {{ memcached_log_file_path }}
 
 # Be verbose
 # -v
@@ -20,10 +22,10 @@ logfile /var/log/memcached.log
 # Start with a cap of 64 megs of memory. It's reasonable, and the daemon default
 # Note that the daemon will grow to this size, but does not start out holding this much
 # memory
--m 128
+-m {{ memcached_memory_limit }}
 
 # Default connection port is 11211
--p 11211
+-p {{ memcached_port }}
 
 # Run the daemon as root. The start-memcached will default to running as root if no
 # -u command is present in this config file
@@ -32,10 +34,10 @@ logfile /var/log/memcached.log
 # Specify which IP address to listen on. The default is to listen on all IP addresses
 # This parameter is one of the only security measures that memcached has, so make sure
 # it's listening on a firewalled interface.
--l 127.0.0.1
+-l {{ memcached_address }}
 
 # Limit the number of simultaneous incoming connections. The daemon default is 1024
-# -c 1024
+-c {{ memcached_incoming_conns }}
 
 # Lock down all paged memory. Consult with the README and homepage before you do this
 # -k
