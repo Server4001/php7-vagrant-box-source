@@ -10,6 +10,7 @@
   roles:
     - repo_install
     - common
+    - php
 #    - mysql
 #    - php7
 #    - nginx

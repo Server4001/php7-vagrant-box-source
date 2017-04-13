@@ -1,0 +1,13 @@
+---
+- name: Install PHP packages via APT
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: no
+  with_items: "{{ php_packages }}"
+
+- name: Start PHP-FPM
+  service:
+    name: php7.1-fpm
+    state: started
+    enabled: yes

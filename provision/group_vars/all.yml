@@ -1,3 +1,6 @@
 ---
 # PHP-FPM socket used by Nginx and PHP-FPM.
-php_fpm_socket_file: /var/run/php71-fpm.sock
+php_fpm_socket_file: /run/php/php7.1-fpm.sock
+
+# Log dir for php apps.
+www_log_dir: /var/log/www

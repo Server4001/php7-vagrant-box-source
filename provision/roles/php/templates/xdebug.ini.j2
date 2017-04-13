@@ -1,5 +1,7 @@
+; {{ ansible_managed }}
+
 ; configuration for php xdebug module
-zend_extension = /usr/lib/php/20151012/xdebug.so
+zend_extension=xdebug.so
 xdebug.remote_enable=1
 xdebug.remote_host=127.0.0.1
 xdebug.remote_port=9000

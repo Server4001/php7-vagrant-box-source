@@ -1,0 +1,58 @@
+---
+- name: Create the www log directory
+  file:
+    path: "{{ www_log_dir }}"
+    state: directory
+    mode: 0755
+    owner: vagrant
+    group: vagrant
+
+- name: Change ownership of PHP directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+    owner: vagrant
+    group: vagrant
+  with_items:
+    - /var/lib/php/sessions
+#    - /run/php
+
+- name: Configure Xdebug
+  template:
+    src: xdebug.ini.j2
+    dest: /etc/php/7.1/mods-available/xdebug.ini
+    mode: 0644
+    owner: root
+    group: root
+  notify: Reload PHP-FPM
+
+- name: Configure PHP
+  template:
+    src: "php-{{ item }}.ini.j2"
+    dest: "/etc/php/7.1/{{ item }}/php.ini"
+    mode: 0644
+    owner: root
+    group: root
+  with_items:
+    - cli
+    - fpm
+  notify: Reload PHP-FPM
+
+- name: Configure the PHP-FPM master process
+  template:
+    src: fpm-master.conf.j2
+    dest: /etc/php/7.1/fpm/php-fpm.conf
+    mode: 0644
+    owner: root
+    group: root
+  notify: Reload PHP-FPM
+
+- name: Configure the PHP-FPM www process pool
+  template:
+    src: fpm-www.conf.j2
+    dest: /etc/php/7.1/fpm/pool.d/www.conf
+    mode: 0644
+    owner: root
+    group: root
+  notify: Reload PHP-FPM
