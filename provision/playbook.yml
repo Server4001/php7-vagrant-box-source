@@ -14,7 +14,7 @@
     - nginx
     - mysql
     - beanstalkd
-#    - redis
+    - redis
 #    - memcached
 #    - composer
 #    - bash

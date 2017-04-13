@@ -1,0 +1,12 @@
+---
+redis_address: 127.0.0.1
+redis_port: 6379
+redis_pid: /var/run/redis/redis-server.pid
+
+redis_timeout: '0'
+redis_tcp_keepalive: '60'
+
+redis_log_level: notice
+redis_log_file_path: /var/log/redis/redis-server.log
+
+redis_databases_qty: 16
