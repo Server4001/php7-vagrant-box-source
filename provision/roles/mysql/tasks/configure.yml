@@ -1,0 +1,9 @@
+---
+- name: Configure MySQL
+  template:
+    src: mysqld.conf.j2
+    dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+    mode: 0644
+    owner: root
+    group: root
+  notify: Restart MySQL

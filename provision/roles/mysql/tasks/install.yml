@@ -1,0 +1,34 @@
+---
+- name: Add MySQL APT key
+  apt_key:
+    keyserver: ha.pool.sks-keyservers.net
+    id: A4A9406876FCBD3C456770C88C718D3B5072E1F5
+    state: present
+
+- name: Add MySQL repository
+  copy:
+    src: mysql.list
+    dest: /etc/apt/sources.list.d/mysql.list
+    mode: 0644
+    owner: root
+    group: root
+
+- name: Set root user password
+  debconf:
+    name: mysql-community-server
+    question: 'mysql-community-server/root-pass'
+    value: '{{ mysql_root_password }}'
+    vtype: password
+
+- name: Set root user password again
+  debconf:
+    name: mysql-community-server
+    question: 'mysql-community-server/re-root-pass'
+    value: '{{ mysql_root_password }}'
+    vtype: password
+
+- name: Install MySQL 5.7
+  apt:
+    name: mysql-server
+    state: present
+    update_cache: true

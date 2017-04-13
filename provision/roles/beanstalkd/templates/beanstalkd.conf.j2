@@ -1,0 +1,16 @@
+# {{ ansible_managed }}
+
+## Defaults for the beanstalkd init script, /etc/init.d/beanstalkd on
+## Debian systems. Append ``-b /var/lib/beanstalkd'' for persistent
+## storage.
+BEANSTALKD_LISTEN_ADDR={{ beanstalkd_listen_address }}
+BEANSTALKD_LISTEN_PORT={{ beanstalkd_listen_port }}
+BEANSTALKD_BINLOG_PATH={{ beanstalkd_binlog_path }}
+BEANSTALKD_BINLOG_FSYNC_PERIOD={{ beanstalkd_binlog_fsync_period }}
+BEANSTALKD_BINLOG_SIZE={{ beanstalkd_binlog_size }}
+BEANSTALKD_MAX_JOB_SIZE={{ beanstalkd_max_job_size }}
+
+# You can use BEANSTALKD_EXTRA to pass additional options. See beanstalkd(1)
+# for a list of the available options. Uncomment the following line for
+# persistent job storage.
+BEANSTALKD_EXTRA="-b ${BEANSTALKD_BINLOG_PATH} -f ${BEANSTALKD_BINLOG_FSYNC_PERIOD} -s ${BEANSTALKD_BINLOG_SIZE} -z ${BEANSTALKD_MAX_JOB_SIZE}"

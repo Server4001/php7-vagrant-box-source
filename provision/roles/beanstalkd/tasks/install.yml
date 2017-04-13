@@ -1,0 +1,12 @@
+---
+- name: Install beanstalkd
+  apt:
+    name: beanstalkd
+    state: present
+    update_cache: no
+
+- name: Start beanstalkd
+  service:
+    name: beanstalkd
+    state: started
+    enabled: true

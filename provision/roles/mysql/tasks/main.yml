@@ -1,0 +1,9 @@
+---
+- include: check_installed.yml
+
+- include: install.yml
+  when: mysql_installed.stat.exists == False
+
+- include: start.yml
+
+- include: configure.yml

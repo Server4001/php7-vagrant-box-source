@@ -1,0 +1,9 @@
+---
+- name: Configure beanstalkd
+  template:
+    src: beanstalkd.conf.j2
+    dest: /etc/default/beanstalkd
+    mode: 0644
+    owner: root
+    group: root
+  notify: Restart Beanstalkd

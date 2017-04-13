@@ -1,0 +1,7 @@
+---
+beanstalkd_listen_address: '0.0.0.0'
+beanstalkd_listen_port: '11300'
+beanstalkd_binlog_fsync_period: '0'
+beanstalkd_binlog_path: /var/lib/beanstalkd
+beanstalkd_binlog_size: '10485760'
+beanstalkd_max_job_size: 65535

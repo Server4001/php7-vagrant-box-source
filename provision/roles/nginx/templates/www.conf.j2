@@ -1,5 +1,7 @@
+# {{ ansible_managed }}
+
 upstream phpfpm {
-    server unix:/var/run/php71-fpm.sock;
+    server unix:{{ php_fpm_socket_file }};
 }
 
 server {

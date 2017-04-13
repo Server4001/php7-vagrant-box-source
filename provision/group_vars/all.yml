@@ -4,3 +4,6 @@ php_fpm_socket_file: /run/php/php7.1-fpm.sock
 
 # Log dir for php apps.
 www_log_dir: /var/log/www
+
+# Max POST body size.
+max_post_size: 999M

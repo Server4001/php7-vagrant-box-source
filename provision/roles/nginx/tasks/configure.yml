@@ -1,0 +1,47 @@
+---
+- name: Create the web root directory
+  file:
+    path: /var/www/html
+    state: directory
+    mode: 0755
+    owner: vagrant
+    group: vagrant
+
+- name: Configure nginx
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    mode: 0644
+    owner: root
+    group: root
+  notify: Reload Nginx
+
+- name: Configure www vhost
+  template:
+    src: www.conf.j2
+    dest: /etc/nginx/conf.d/www.conf
+    mode: 0644
+    owner: root
+    group: root
+  notify: Reload Nginx
+
+- name: Delete the default web root index file
+  file:
+    path: /var/www/html/index.nginx-debian.html
+    state: absent
+
+- name: Add the default web root PHP file
+  template:
+    src: index.php.j2
+    dest: /var/www/html/index.php
+    mode: 0644
+    owner: vagrant
+    group: vagrant
+
+- name: Change permissions for nginx logs
+  file:
+    path: /var/log/nginx
+    state: directory
+    recurse: yes
+    owner: vagrant
+    group: vagrant

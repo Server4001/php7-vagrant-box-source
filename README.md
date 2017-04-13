@@ -15,6 +15,11 @@
 * PHP 7.0.14
 * [PHP7 Data Structures](https://github.com/php-ds/extension)
 
+### LEMP Details
+* MySQL Username: `root`
+* MySQL Password: `password`
+* Web Root: `/var/www/html`
+
 ### Instructions
 
 * `vagrant up`
@@ -29,10 +34,6 @@
 * Add a new provider to the version. The type should be `virtualbox`. Upload the .box file to this provider.
 * Commit your changes via git.
 * Add a new git tag: `git tag php71-0.1.0 && git push origin php71-0.1.0`.
-
-### MySQL Credentials
-* Username: `root`
-* Password: `password`
 
 ### Pre-Packaging Commands
 

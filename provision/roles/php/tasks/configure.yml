@@ -25,7 +25,16 @@
     mode: 0644
     owner: root
     group: root
-  notify: Reload PHP-FPM
+  notify: Restart PHP-FPM
+
+- name: Configure Opcache
+  template:
+    src: opcache.ini.j2
+    dest: /etc/php/7.1/mods-available/opcache.ini
+    mode: 0644
+    owner: root
+    group: root
+  notify: Restart PHP-FPM
 
 - name: Configure PHP
   template:
@@ -37,7 +46,7 @@
   with_items:
     - cli
     - fpm
-  notify: Reload PHP-FPM
+  notify: Restart PHP-FPM
 
 - name: Configure the PHP-FPM master process
   template:
@@ -46,7 +55,7 @@
     mode: 0644
     owner: root
     group: root
-  notify: Reload PHP-FPM
+  notify: Restart PHP-FPM
 
 - name: Configure the PHP-FPM www process pool
   template:
@@ -55,4 +64,4 @@
     mode: 0644
     owner: root
     group: root
-  notify: Reload PHP-FPM
+  notify: Restart PHP-FPM

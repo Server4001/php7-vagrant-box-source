@@ -1,3 +1,5 @@
+# {{ ansible_managed }}
+
 # For more information on configuration, see:
 #   * Official English Documentation: http://nginx.org/en/docs/
 #   * Official Russian Documentation: http://nginx.org/ru/docs/
@@ -35,7 +37,7 @@ http {
 
     #gzip  on;
 
-    client_max_body_size 999M;
+    client_max_body_size {{ max_post_size }};
 
     # Load modular configuration files from the /etc/nginx/conf.d directory.
     # See http://nginx.org/en/docs/ngx_core_module.html#include
